@@ -35,54 +35,60 @@ export default async function BikeDetailPage({ params }: { params: { id: string 
         ← Back to Bikes
       </Link>
       
-      <div className="grid md:grid-cols-2 gap-8">
-        {bike.image_url && (
-          <div className="relative h-96 rounded-lg overflow-hidden">
-            <Image
-              src={bike.image_url}
-              alt={bike.name}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-          </div>
-        )}
-        
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">{bike.name}</h1>
-          <div className="flex items-center gap-4 mb-6">
-            <span className="text-3xl font-bold text-gray-900">
-              ${bike.price.toFixed(2)}
-            </span>
-            <span className={`px-3 py-1 rounded-full text-sm ${
-              bike.quantity > 0 
-                ? 'bg-green-100 text-green-800' 
-                : 'bg-red-100 text-red-800'
-            }`}>
-              {bike.quantity > 0 ? `${bike.quantity} in stock` : 'Out of Stock'}
-            </span>
-          </div>
+      <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+        <div className="grid md:grid-cols-2">
+          {bike.image_url && (
+            <div className="relative h-[500px]">
+              <Image
+                src={bike.image_url}
+                alt={bike.name}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            </div>
+          )}
           
-          <div className="prose prose-sm max-w-none mb-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">Description</h2>
-            <p className="text-gray-600">{bike.description}</p>
+          <div className="p-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">{bike.name}</h1>
+            
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-3xl font-bold text-gray-900">
+                ${bike.price.toFixed(2)}
+              </span>
+              <span className={`px-3 py-1 rounded-full text-sm ${
+                bike.quantity > 0 
+                  ? 'bg-green-100 text-green-800' 
+                  : 'bg-red-100 text-red-800'
+              }`}>
+                {bike.quantity > 0 ? `${bike.quantity} in stock` : 'Out of Stock'}
+              </span>
+            </div>
+            
+            <div className="border-t border-gray-100 pt-6 mb-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-3">Description</h2>
+              <p className="text-gray-600 leading-relaxed">{bike.description}</p>
+            </div>
+            
+            <div className="border-t border-gray-100 pt-6 mb-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">Details</h2>
+              <dl className="grid grid-cols-2 gap-4">
+                <div>
+                  <dt className="text-sm font-medium text-gray-500">Type</dt>
+                  <dd className="mt-1 text-gray-900 capitalize">{bike.type}</dd>
+                </div>
+                <div>
+                  <dt className="text-sm font-medium text-gray-500">Rating</dt>
+                  <dd className="mt-1 text-gray-900">{bike.rating} / 5</dd>
+                </div>
+              </dl>
+            </div>
+            
+            <div className="border-t border-gray-100 pt-6">
+              <AddToCartButton inStock={bike.quantity > 0} />
+            </div>
           </div>
-          
-          <div className="mb-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">Details</h2>
-            <dl className="grid grid-cols-1 gap-4">
-              <div>
-                <dt className="text-sm font-medium text-gray-500">Type</dt>
-                <dd className="text-gray-900 capitalize">{bike.type}</dd>
-              </div>
-              <div>
-                <dt className="text-sm font-medium text-gray-500">Rating</dt>
-                <dd className="text-gray-900">{bike.rating} / 5</dd>
-              </div>
-            </dl>
-          </div>
-          
-          <AddToCartButton inStock={bike.quantity > 0} />
         </div>
       </div>
     </div>
