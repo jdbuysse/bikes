@@ -4,6 +4,11 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import AddToCartButton from './AddToCartButton';
 
+type Props = {
+  params: Promise<{ id: string }>;
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
 async function getBike(id: string) {
   try {
     const { rows } = await sql`SELECT * FROM bikes WHERE id = ${id}`;
@@ -19,8 +24,9 @@ async function getBike(id: string) {
   }
 }
 
-export default async function BikeDetailPage({ params }: { params: { id: string } }) {
-  const bike = await getBike(params.id);
+export default async function BikeDetailPage({ params, searchParams }: Props) {
+  const { id } = await params;
+  const bike = await getBike(id);
   
   if (!bike) {
     notFound();
