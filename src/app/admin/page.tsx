@@ -31,6 +31,26 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleDelete = async (bikeId: string) => {
+    if (!confirm('Are you sure you want to delete this bike?')) return;
+
+    try {
+      const response = await fetch(`/api/bikes/${bikeId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete bike');
+      }
+
+      // Refresh the bikes list after successful deletion
+      fetchBikes();
+    } catch (err) {
+      console.error('Delete error:', err);
+      alert('Failed to delete bike');
+    }
+  };
+
   if (loading) return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
@@ -100,9 +120,7 @@ export default function AdminDashboard() {
                 </Link>
                 <button 
                   className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                  onClick={() => {
-                    // TODO: Add delete functionality
-                  }}
+                  onClick={() => handleDelete(bike.id)}
                 >
                   Delete
                 </button>
