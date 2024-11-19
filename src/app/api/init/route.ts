@@ -5,9 +5,10 @@ export async function GET() {
   try {
     await createBikesTable();
     return NextResponse.json({ message: 'Database initialized successfully' });
-  } catch (error) {
+  } catch (err) {
+    console.error('Error initializing database:', err);
     return NextResponse.json(
-      { error: 'Failed to initialize database' },
+      { error: 'Failed to initialize database', details: err instanceof Error ? err.message : 'Unknown error' },
       { status: 500 }
     );
   }
