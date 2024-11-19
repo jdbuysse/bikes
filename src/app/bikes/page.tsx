@@ -38,41 +38,35 @@ export default async function BikesPage() {
             key={bike.id} 
             className="border rounded-lg shadow-sm overflow-hidden bg-white hover:shadow-md transition-shadow"
           >
-            {bike.image_url && (
-              <div className="relative w-full h-48">
-                <Image
-                  src={bike.image_url}
-                  alt={bike.name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
+            <Link href={`/bikes/${bike.id}`}>
+              {bike.image_url && (
+                <div className="relative w-full h-48">
+                  <Image
+                    src={bike.image_url}
+                    alt={bike.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+              )}
+              <div className="p-4">
+                <h2 className="text-xl font-semibold text-gray-900 mb-2">{bike.name}</h2>
+                <p className="text-gray-600 mb-4 line-clamp-2">{bike.description}</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-2xl font-bold text-gray-900">
+                    ${bike.price.toFixed(2)}
+                  </span>
+                  <span className={`px-3 py-1 rounded-full text-sm ${
+                    bike.quantity > 0 
+                      ? 'bg-green-100 text-green-800' 
+                      : 'bg-red-100 text-red-800'
+                  }`}>
+                    {bike.quantity > 0 ? 'In Stock' : 'Out of Stock'}
+                  </span>
+                </div>
               </div>
-            )}
-            <div className="p-4">
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">{bike.name}</h2>
-              <p className="text-gray-600 mb-4 line-clamp-2">{bike.description}</p>
-              <div className="flex justify-between items-center">
-                <span className="text-2xl font-bold text-gray-900">
-                  ${bike.price.toFixed(2)}
-                </span>
-                <span className={`px-3 py-1 rounded-full text-sm ${
-                  bike.quantity > 0 
-                    ? 'bg-green-100 text-green-800' 
-                    : 'bg-red-100 text-red-800'
-                }`}>
-                  {bike.quantity > 0 ? 'In Stock' : 'Out of Stock'}
-                </span>
-              </div>
-              <div className="mt-4">
-                <Link
-                  href={`/bikes/${bike.id}`}
-                  className="block text-center bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
-                >
-                  View Details
-                </Link>
-              </div>
-            </div>
+            </Link>
           </div>
         ))}
       </div>

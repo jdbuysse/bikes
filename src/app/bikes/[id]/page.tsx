@@ -2,6 +2,7 @@ import { sql } from '@vercel/postgres';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import AddToCartButton from './AddToCartButton';
 
 async function getBike(id: string) {
   try {
@@ -81,17 +82,7 @@ export default async function BikeDetailPage({ params }: { params: { id: string 
             </dl>
           </div>
           
-          {bike.quantity > 0 && (
-            <button 
-              className="w-full bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600 transition-colors"
-              onClick={() => {
-                // TODO: Implement add to cart functionality
-                alert('Add to cart functionality coming soon!');
-              }}
-            >
-              Add to Cart
-            </button>
-          )}
+          <AddToCartButton inStock={bike.quantity > 0} />
         </div>
       </div>
     </div>
