@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Bike } from '@/types/bike';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function AdminDashboard() {
   const [bikes, setBikes] = useState<Bike[]>([]);
@@ -72,11 +73,15 @@ export default function AdminDashboard() {
           bikes.map((bike) => (
             <div key={bike.id} className="border rounded-lg p-6 shadow-sm">
               {bike.imageUrl && (
-                <img 
-                  src={bike.imageUrl} 
-                  alt={bike.name}
-                  className="w-full h-48 object-cover rounded-md mb-4"
-                />
+                <div className="relative w-full h-48 mb-4">
+                  <Image 
+                    src={bike.imageUrl} 
+                    alt={bike.name}
+                    fill
+                    className="object-cover rounded-md"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
               )}
               <h2 className="text-xl font-semibold mb-2">{bike.name}</h2>
               <p className="text-gray-600 mb-4 line-clamp-2">{bike.description}</p>

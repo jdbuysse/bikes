@@ -1,6 +1,5 @@
 import { sql } from '@vercel/postgres';
 import { NextResponse } from 'next/server';
-import { Bike } from '@/types/bike';
 
 // GET all bikes
 export async function GET() {
