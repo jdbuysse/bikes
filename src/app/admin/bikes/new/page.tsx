@@ -51,16 +51,8 @@ export default function NewBike() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-2xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Add New Bike</h1>
-          <Link 
-            href="/admin"
-            className="text-blue-500 hover:text-blue-700"
-          >
-            Back to Dashboard
-          </Link>
-        </div>
-
+        <h1 className="text-2xl font-bold mb-6 text-gray-800">Add New Bike</h1>
+        
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6">
             {error}
@@ -69,7 +61,7 @@ export default function NewBike() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
               Name
             </label>
             <input
@@ -77,63 +69,61 @@ export default function NewBike() {
               name="name"
               id="name"
               required
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none"
             />
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
               Description
             </label>
             <textarea
               name="description"
               id="description"
-              rows={4}
               required
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none"
+              rows={3}
+              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none"
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label htmlFor="price" className="block text-sm font-medium text-gray-700">
-                Price ($)
-              </label>
-              <input
-                type="number"
-                name="price"
-                id="price"
-                step="0.01"
-                min="0"
-                required
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
-                Quantity
-              </label>
-              <input
-                type="number"
-                name="quantity"
-                id="quantity"
-                min="0"
-                required
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none"
-              />
-            </div>
+          <div>
+            <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-1">
+              Price
+            </label>
+            <input
+              type="number"
+              name="price"
+              id="price"
+              required
+              min="0"
+              step="0.01"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none"
+            />
           </div>
 
           <div>
-            <label htmlFor="type" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-1">
+              Quantity
+            </label>
+            <input
+              type="number"
+              name="quantity"
+              id="quantity"
+              required
+              min="0"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">
               Type
             </label>
             <select
               name="type"
               id="type"
               required
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none"
             >
               <option value="">Select a type</option>
               <option value="road">Road Bike</option>
@@ -144,47 +134,32 @@ export default function NewBike() {
           </div>
 
           <div>
-            <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700">
-              Image URL
+            <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-1">
+              Image URL (optional)
             </label>
             <input
-              type="text"
+              type="url"
               name="imageUrl"
               id="imageUrl"
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none"
             />
           </div>
 
-          <div>
+          <div className="flex justify-end gap-4">
+            <Link
+              href="/admin"
+              className="px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50"
+            >
+              Cancel
+            </Link>
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className={`px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 disabled:bg-blue-300 ${
+                loading ? 'cursor-not-allowed' : ''
+              }`}
             >
-              {loading ? (
-                <svg
-                  className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C9.545 0 5.229 2.015 2.222 5.522a9.087 9.087 0 00-1.516 3.332 9.007 9.007 0 01-2.415-2.415z"
-                  ></path>
-                </svg>
-              ) : (
-                'Add Bike'
-              )}
+              {loading ? 'Adding...' : 'Add Bike'}
             </button>
           </div>
         </form>

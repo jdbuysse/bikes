@@ -87,7 +87,7 @@ export default function AdminDashboard() {
               <p className="text-gray-600 mb-4 line-clamp-2">{bike.description}</p>
               <div className="flex justify-between items-center mb-4">
                 <span className="font-bold text-lg">${bike.price}</span>
-                <span className="text-sm bg-gray-100 px-2 py-1 rounded">
+                <span className="text-sm bg-blue-600 text-white px-3 py-1.5 rounded-full font-medium">
                   Stock: {bike.quantity}
                 </span>
               </div>
