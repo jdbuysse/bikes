@@ -6,7 +6,6 @@ import AddToCartButton from './AddToCartButton';
 
 type Props = {
   params: Promise<{ id: string }>;
-  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 async function getBike(id: string) {
@@ -24,7 +23,7 @@ async function getBike(id: string) {
   }
 }
 
-export default async function BikeDetailPage({ params, searchParams }: Props) {
+export default async function BikeDetailPage({ params }: Props) {
   const { id } = await params;
   const bike = await getBike(id);
   
