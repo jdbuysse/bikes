@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { sql } from '@vercel/postgres';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
@@ -19,8 +21,8 @@ async function getBike(id: string) {
   }
 }
 
-export default async function BikePage({ params }: { params: { id: string } }) {
-  const bike = await getBike(params.id);
+export default async function BikePage({ params }: any) {
+  const bike: any = await getBike(params.id);
   
   if (!bike) {
     notFound();
