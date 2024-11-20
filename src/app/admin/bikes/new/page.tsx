@@ -135,7 +135,7 @@ export default function NewBike() {
 
           <div>
             <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-1">
-              Image URL (optional)
+              Image URL (placeholder, not supported yet)
             </label>
             <input
               type="url"

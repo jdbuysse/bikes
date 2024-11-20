@@ -164,7 +164,7 @@ export default function EditBike({ params }: any) {
 
           <div>
             <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-1">
-              Image URL
+              Image URL (placeholder, not supported yet)
             </label>
             <input
               type="url"
