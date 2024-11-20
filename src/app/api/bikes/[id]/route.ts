@@ -17,10 +17,8 @@ export async function DELETE(
   }
 }
 
-export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function PUT(request: Request, context: any) {
   try {
     const bike = await request.json();
     const { rows } = await sql`
@@ -33,7 +31,7 @@ export async function PUT(
         type = ${bike.type},
         image_url = ${bike.imageUrl},
         updated_at = CURRENT_TIMESTAMP
-      WHERE id = ${params.id}
+      WHERE id = ${context.params.id}
       RETURNING *
     `;
 
