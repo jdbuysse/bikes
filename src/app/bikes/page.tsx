@@ -33,7 +33,7 @@ export default async function BikesPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {bikes.map((bike) => (
+        {bikes.map((bike: any) => (
           <div 
             key={bike.id} 
             className="border rounded-lg shadow-sm overflow-hidden bg-white hover:shadow-md transition-shadow"

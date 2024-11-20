@@ -1,40 +1,8 @@
 import { sql } from '@vercel/postgres';
 import { notFound } from 'next/navigation';
-import type { Metadata } from 'next';
 
-type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
-// Generate static paths at build time
-export async function generateStaticParams() {
-  try {
-    const { rows } = await sql`SELECT id FROM bikes`;
-    return rows.map((bike) => ({
-      id: bike.id.toString(),
-    }));
-  } catch (error) {
-    console.error('Error generating static params:', error);
-    return [];
-  }
-}
-
-// Generate metadata for SEO
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const bike = await getBike(params.id);
-  
-  if (!bike) {
-    return {
-      title: 'Bike Not Found',
-    };
-  }
-
-  return {
-    title: `${bike.name} - Bike Store`,
-    description: bike.description,
-  };
-}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Props = any;
 
 async function getBike(id: string) {
   try {

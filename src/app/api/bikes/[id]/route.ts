@@ -1,10 +1,8 @@
 import { sql } from '@vercel/postgres';
 import { NextResponse } from 'next/server';
 
-export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function DELETE(request: Request, { params }: any) {
   try {
     await sql`DELETE FROM bikes WHERE id = ${params.id}`;
     return NextResponse.json({ message: 'Bike deleted successfully' });
