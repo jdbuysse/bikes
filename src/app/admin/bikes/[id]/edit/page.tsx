@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Bike } from '@/types/bike';
 
-export default function EditBike({ params }: { params: { id: string } }) {
+export default function EditBike({ params }: any) {
   const router = useRouter();
   const [bike, setBike] = useState<Bike | null>(null);
   const [error, setError] = useState<string | null>(null);
